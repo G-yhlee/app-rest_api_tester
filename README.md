@@ -6,7 +6,7 @@
 
 # 기본 설정
 ```erlang
-> git clone ...
+> git clone https://github.com/G-yhlee/app-rest_api_tester.git
 > npm i -g json-server 
 > json-server --watch db.json
 > localhost:3000 접속하여 튜토리얼 시작
