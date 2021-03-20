@@ -1,0 +1,132 @@
+<head>
+    <style>
+        textarea {
+            width: 100%;
+            overflow-y: visible;
+        }
+
+        .run {
+            width: 100%;
+            margin: 0.2rem 0;
+        }
+
+        pre {
+            margin: 0;
+        }
+
+        html {
+            margin: 8rem 0;
+
+        }
+
+        body {
+            display: grid;
+            grid-template-columns: 1fr 1024px 1fr;
+            font-family: 'Spoqa Han Sans', 'Sans-serif';
+            font-weight: 100;
+        }
+
+        h1 {
+            font-size: 5rem;
+            text-align: center;
+        }
+
+        h3 {
+            margin-top: 5rem;
+            margin-bottom: 0.2rem;
+        }
+    </style>
+    <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+    <div></div>
+    <div>
+
+        <h1>REST API 실험실</h1>
+
+        <h2>준비</h2>
+        <ol>
+            <li>
+                <a href="https://github.com/egoing/rest-api-lab">README.md</a>파일을 참고해서 설정합니다.
+            </li>
+            <li>
+                node.js 설치
+            </li>
+            <li>
+                json-server 설치<br>
+                npm i -g json-server
+            </li>
+            <li>
+                db.json 파일을 만듭니다. <br>
+                <pre>
+{
+    "topics": [
+        {
+            "id": 1,
+            "title": "REST",
+            "body": "REST is ..."
+        }
+    ],
+    "comments": [
+        {      
+            "id": 1,
+            "body": "POST is ...",
+            "topicId":1 
+        },
+        {
+            "id": 2,
+            "body": "READ comments is ...",
+            "topicId":1 
+        }
+    ]
+}
+                </pre>
+            </li>
+            <li>
+                json-server 실행<br>
+                json-server --watch db.json<br>
+                => db.json 파일이 생성됩니다.
+            </li>
+            <li>
+                개발자 도구의 Network 탭을 열고 ESC 키를 눌러서 콘솔창도 열어주세요.
+            </li>
+            <li>
+                실행버튼을 누르면 자바스크립트 코드가 실행됩니다.
+            </li>
+        </ol>
+
+        <h3>생성 - POST</h3>
+        <textarea id="post" rows="10" onclick='this.style.height = "";this.style.height = this.scrollHeight + "px"'>
+            doFetch
+        </textarea>
+        <input id="h1" class="run" type="button" value="실행" >
+
+    <script>
+        document.querySelector('#h1').onclick = function(){doFetch()};
+        function doFetch() {
+            fetch('topics', {
+                method:'POST', 
+                headers:{'content-type':'application/json'},
+                body:JSON.stringify({title:'fetch', body:'fetch is ...'})
+            })
+            .then(
+                function(response){
+                    console.log('status', response.status);
+                    return response.json()
+                }
+            )
+            .then(
+                function(result){
+                    console.log(result);
+                }
+            )
+        }
+
+        function myFunction() {
+          document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
+        }
+    </script>
+        
+</body>
